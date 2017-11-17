@@ -17,10 +17,16 @@ extension NSString {
         let str = "tel:\(telephoneNumber)"
         let application = UIApplication.shared
         let url = URL(string: str)
-        application.open(url!, options: [:], completionHandler: {(_ success: Bool) -> Void in
-            
-            print("OpenSuccess=\(success)")
-        })
+        
+        if #available(iOS 10.0, *){
+            application.open(url!, options: [:], completionHandler: {(_ success: Bool) -> Void in
+                
+                print("OpenSuccess=\(success)")
+            })
+        }else{
+            application.openURL(url!)
+        }
+
         
     }
     
